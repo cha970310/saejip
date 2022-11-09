@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Blog Archive for Day</title> {% endblock %}
+</head>
+<body>
+
+{% block content %}
+<h1> Post Archive for {{ day|date:"N d, Y "}}</h1>
+
+<div>
+    <ul>
+        {% for post in object_list %}
+        <li><a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+</body>
+</html>

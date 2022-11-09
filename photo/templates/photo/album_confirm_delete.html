@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Title</title>{% endblock %}
+</head>
+<body>
+{% block content %}
+
+<h1>Album 삭제 </h1>
+<br>
+
+<form action="" method="post" >{% csrf_token %}
+
+<p> 정말로 삭제하시겠습니까? "{{object}}"</p>
+    <input type="submit" value="삭제" class="btn btn-danger btn-sm"/>
+</form>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% block title %}<title>사진 상세</title>{% endblock %}
+    {% block extra-style %}
+
+    {% endblock %}
+</head>
+<body>
+{% block content%}
+<h2 class="mt-5">{{object.title}}</h2>
+<div class="row">
+    <div class="col-md-9">
+        <a href="{{object.image.url}}">
+            <img src="{{object.image.url}}" style="width:100%;">
+        </a>
+    </div>
+    <ul class="col-md-3 mt-3">
+        <li class="h5">
+            사진 상세
+        </li>
+        {% if object.description %}<p>{{object.description|linebreaks}}</p>
+        {% else %}<p>(blank)</p>{% endif %}
+        <li class="h5"> 업로드 날짜 </li>
+            <p class="font-italic">{{ object.upload_dt }}</p>
+        <li class="h5"> 앨범 이름 </li>
+            <p class="font-italic">
+                <a href="{% url 'photo:album_detail' object.album.id %}">{{object.album.name}}</a>
+            </p>
+    </ul>
+</div>
+
+{% endblock %}
+
+</body>
+</html>

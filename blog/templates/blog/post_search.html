@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% block title %}<title>post_search</title>{% endblock %}
+</head>
+<body>
+{% block content %}
+<h1> Blog Search </h1>
+<br>
+<form action="." method="post">  {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="검색" class="btn btn-success btn-sm">
+</form>
+<br><br>
+
+    {% if object_list %}
+        {% for post in object_list %}
+            <h2> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </h2>
+                {{ post.modify_date|date:"N d, Y" }}
+            <p> {{ post.description }}</p>
+        {% endfor %}
+    {% elif search_term %}
+<b><i> 검색하신 <span style="color:red; font-size:16px;">'{{ search_term }}'</span>을(를) 검색 결과에서 찾지 못했습니다. </i></b>
+    {% endif %}
+{% endblock %}
+
+
+</body>
+</html>

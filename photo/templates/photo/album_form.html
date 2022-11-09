@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% load widget_tweaks %}
+    {% block title %}<title>Title</title>{% endblock %}
+</head>
+<body>
+{% block content %}
+<h1>앨범 - 사진 생성/변경 페이지 </h1>
+<p class="font-italic">앨범 내 사진을 생성하거나 변경하는 페이지입니다. </p>
+
+{% if form.errors %}
+<div class="alert alert-danger">
+    <div class="font-weight-bold">잘못된 접근입니다.</div>
+    {{form.errors}}
+</div>
+{% endif %}
+
+{% if formset.errors %}
+<div class="alert alert-warning">
+    <div class="font-weight-bold"> 제대로 작성해주세요 </div>
+    {% for formerrors in formset.errors %}
+    {{formerrors}}
+    {% endfor %}
+</div>
+
+{% endif %}
+
+{% if form.is_multipart or formset.is_mulipart %}
+
+{% else %}
+<form action="" method="post"></form>
+{% endif %}
+{% csrf_token %}
+<h4> 앨범 내용을 생성 혹은 수정하세요 </h4>
+<fieldset class="card pt-3">
+    <div class="form-group row">
+        {{form.name|add_label_class:"col-form-label col-sm-3 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.name|add_class:"form-control"|attr:"autofocus"}}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{form.description|add_label_class:"col-form-label col-sm-3 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.description|add_class:"form-control"}}
+        </div>
+    </div>
+</fieldset>
+<br>
+
+<h4>사진 안의 내용을 생성 혹은 수정하세요 </h4>
+<fieldset class="card pt-3">
+    {{formset.management_form}}
+    {% for form in formset %}
+    {{form.id}}
+    {# form.album #}
+    <div class="form-group row">
+        {{form.image|add_label_class:"col-form-label col-sm-3 ml-3 font-weight-bold" }}
+        <div class="col-sm-5">
+            {{form.image|add_class:"form-control-file "}}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.title|add_label_class:"col-form-label col-sm-3 ml-3 font-weight-bold" }}
+        <div class="col-sm-5">
+            {{ form.title|add_class:"form-control"}}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.description|add_label_class:"col-form-label col-sm-3 ml-3 font-weight-bold" }}
+        <div class="col-sm-5">
+            {{ form.description|add_class:"form-control"|attr:"rows 3"}}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</fieldset>
+
+<div class="form-group">
+    <div class="offset-sm-3 col-sm-5">
+        <input type="submit" value="Submit" class="btn btn-success"/>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

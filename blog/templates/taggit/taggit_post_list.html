@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Tag Post List </title> {% endblock %}
+</head>
+<body>
+{% block content %}
+<h1> Posts for tag - {{ tagname }}</h1>
+<br>
+{% for post in object_list %}
+<h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
+{{ post.modify_dt|date:"N d,Y" }}
+<p>{{post.description}}</p>
+{% endfor %}
+{% endblock %}
+</body>
+</html>
+
+<!-- Problem was Error of taggit library Version 21.12.24  (Done) -->

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% extends 'base.html' %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    {% block title %}<title>Title</title> {% endblock %}
+</head>
+<body>
+{% block content%}
+<h1>블로그 생성/수정 페이지 --{{user}}</h1>
+<p class="font-italic">
+    생성/수정 페이지입니다.
+</p>
+{% if form.errors %}
+<div class="alert alert-danger">
+    <div class="font-weight-bold">
+        다시 한번 확인해주세요.
+    </div>
+    {{ form.errors }}
+</div>
+{%endif%}
+
+
+<form action="" method="post" class="card-pt-3">
+    {% csrf_token %}
+    <div class="form-group row">
+       {{form.title|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+        <div class="col-sm-5">
+            {{form.title|add_class:"form-control"|attr:"autofocus"}}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{form.slug|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.slug|add_class:"form-control"|attr:"readonly"}}
+        </div>
+        <small class="form-text text-muted">{{form.slug.help_text}}</small>
+    </div>
+
+    <div class="form-group row">
+        {{form.description|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.description|add_class:"form-control"|attr:"autofocus"}}
+        </div>
+        <small class="form-text text-muted">{{form.description.help_text}}</small>
+    </div>
+     <div class="form-group row">
+        {{form.content|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.content|add_class:"form-control"|attr:"autofocus"}}
+        </div>
+    </div>
+     <div class="form-group row">
+        {{form.tags|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold"}}
+        <div class="col-sm-5">
+            {{form.tags|add_class:"form-control"|attr:"autofocus"}}
+        </div>
+         <small class="form-text text-muted">{{form.tags.help_text}}</small>
+    </div>
+
+    <div class="form-group">
+        <div class="offset-sm-2 col-sm-5">
+            <input type="submit" value="submit" class="btn btn-success"/>
+        </div>
+    </div>
+</form>
+{% endblock %}
+</body>
+</html>
